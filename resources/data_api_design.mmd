@@ -1,0 +1,54 @@
+classDiagram
+    class User{
+        +username: str
+        +email: str
+        +password: str
+        +first_name: str
+        +last_name: str
+        +profile_picture: ImageField
+        +friends: ManyToManyField<User>
+        +groups: ManyToManyField<Group>
+        +posts: ForeignKey<Post>
+        +notifications: ForeignKey<Notification>
+        +create_profile(): void
+        +update_profile(): void
+        +send_friend_request(user: User): void
+        +accept_friend_request(user: User): void
+        +decline_friend_request(user: User): void
+        +create_post(caption: str, media: File): void
+        +like_post(post: Post): void
+        +add_comment(post: Post, comment: str): void
+        +share_post(post: Post): void
+        +send_message(user: User, message: str): void
+        +receive_message(user: User, message: str): void
+        +join_group(group: Group): void
+        +leave_group(group: Group): void
+        +get_notifications(): QuerySet<Notification>
+    }
+    class Group{
+        +name: str
+        +description: str
+        +members: ManyToManyField<User>
+        +posts: ForeignKey<Post>
+        +create_post(caption: str, media: File): void
+        +get_posts(): QuerySet<Post>
+    }
+    class Post{
+        +user: ForeignKey<User>
+        +caption: str
+        +media: File
+        +likes: ManyToManyField<User>
+        +comments: ManyToManyField<Comment>
+        +share_count: int
+        +create_comment(comment: str): void
+    }
+    class Comment{
+        +user: ForeignKey<User>
+        +post: ForeignKey<Post>
+        +comment: str
+    }
+    class Notification{
+        +user: ForeignKey<User>
+        +message: str
+        +is_read: bool
+    }

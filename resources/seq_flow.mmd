@@ -1,0 +1,23 @@
+sequenceDiagram
+    participant User
+    participant Group
+    participant Post
+    participant Comment
+    participant Notification
+    User->>+User: create_profile()
+    User->>+User: update_profile()
+    User->>+User: send_friend_request(user)
+    User->>+User: accept_friend_request(user)
+    User->>+User: decline_friend_request(user)
+    User->>+User: create_post(caption, media)
+    User->>+User: like_post(post)
+    User->>+User: add_comment(post, comment)
+    User->>+User: share_post(post)
+    User->>+User: send_message(user, message)
+    User->>+User: receive_message(user, message)
+    User->>+User: join_group(group)
+    User->>+User: leave_group(group)
+    User->>+User: get_notifications()
+    Group->>+Group: create_post(caption, media)
+    Group->>+Group: get_posts()
+    Post->>+Post: create_comment(comment)
